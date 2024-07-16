@@ -1,5 +1,6 @@
-pub fn stem(word: String) -> String {
-    let m = calc_m(&word);
+pub fn stem(word: &str) -> String {
+    let m = calc_m(word);
+    println!("m for {}: {}", word, m);
     
     unimplemented!()
 }
@@ -15,8 +16,6 @@ fn calc_m(word: &str) -> u8 {
     for letter in word.chars() {
         is_vowel_list.push(is_vowel(letter, is_vowel_list.last()))
     }
-
-    let is_last_letter_vowel = is_vowel_list.pop().unwrap();
 
     //simplifies vowels/constanants following each other 
     let mut i: usize = 0;

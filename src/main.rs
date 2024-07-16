@@ -3,7 +3,9 @@ mod porter;
 
 fn main() {
     let text_list = read_text_data(20);
-    println!("{:#?}", text_list);
+
+    let word = text_list[5].0.split(" ").nth(0).unwrap();
+    porter::stem(word);
 }
 
 fn read_text_data(text_item_num: usize) -> Vec::<(String, u8)> {
