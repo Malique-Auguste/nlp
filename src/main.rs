@@ -4,9 +4,15 @@ mod porter;
 fn main() {
     let text_list = read_text_data(20);
 
-    //let word = text_list[5].0.split(" ").nth(0).unwrap();
-    let word = "Haras";
-    println!("{}", porter::stem(word.into()));
+    let text = text_list[1].0.clone();
+
+    let cleaned_text = clean_text(text.to_lowercase());
+    let split_text: Vec<&str> = cleaned_text.split(" ").collect();
+
+    let stemmed_text: Vec<String> = split_text.iter().map(|word| porter::stem((*word).into())).collect();
+    let stemmed_text = stemmed_text.join(" ");
+    
+    println!("Original text:\n{}\n\nCleaned text:\n{}\n\nStemmed Text:\n{}", text, cleaned_text, stemmed_text );
 }
 
 fn read_text_data(text_item_num: usize) -> Vec::<(String, u8)> {
@@ -51,4 +57,23 @@ fn read_text_data(text_item_num: usize) -> Vec::<(String, u8)> {
     }
 
     text_list
+}
+
+fn clean_text(text: String) -> String {
+    let mut characters: Vec<char> = text.chars().collect();
+
+    let mut i = 0;
+    while i < characters.len() {
+        if characters[i].is_alphanumeric() || characters[i].is_whitespace() {
+            i += 1;
+        }
+        else {
+            characters.insert(i, ' ');
+            characters.insert(i + 2, ' ');
+            i += 3
+        }
+    }
+
+    let output: String = characters.into_iter().collect();
+    output.replace("  ", " ")
 }
