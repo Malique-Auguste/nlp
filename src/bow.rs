@@ -25,7 +25,13 @@ pub fn gen_bags_of_words(text_list: Vec<String>, count_duplicates: bool) -> Vec<
         for word in text_list[i].split_whitespace() {
             let bow_word_index = *dictionary.get(word.into()).unwrap();
 
-            bags_of_words[i][(0, bow_word_index)] = 1.0;
+            if count_duplicates {
+                bags_of_words[i][(0, bow_word_index)] += 1.0;
+            }
+            else {
+                bags_of_words[i][(0, bow_word_index)] = 1.0;
+            }
+            
         }
     }
 
