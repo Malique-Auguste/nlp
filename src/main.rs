@@ -1,17 +1,18 @@
 use std::fs;
 mod porter;
+mod bow;
 
 fn main() {
     let text_list = read_text_data(20);
 
-    let text = text_list[1].0.clone();
+    let text = text_list[0].0.clone();
 
     let cleaned_text = clean_text(text.to_lowercase());
     let split_text: Vec<&str> = cleaned_text.split(" ").collect();
 
     let stemmed_text: Vec<String> = split_text.iter().map(|word| porter::stem((*word).into())).collect();
     let stemmed_text = stemmed_text.join(" ");
-    
+
     println!("Original text:\n{}\n\nCleaned text:\n{}\n\nStemmed Text:\n{}", text, cleaned_text, stemmed_text );
 }
 
