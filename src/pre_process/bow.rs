@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use ndarray::Array2;
 
-pub fn gen_bags_of_words(text_list: Vec<String>, count_duplicates: bool) -> Vec<Array2<f64>> {
+pub fn gen_bags_of_words(text_list: Vec<String>, count_duplicates: bool, print_dict: bool) -> Vec<Array2<f64>> {
     let mut dictionary: HashMap<String, usize> = HashMap::new();
     
     //populates dictionary with all the words in the dataset
@@ -34,6 +34,14 @@ pub fn gen_bags_of_words(text_list: Vec<String>, count_duplicates: bool) -> Vec<
             
         }
     }
+
+    if print_dict {
+        let mut dict_inner = dictionary.iter().collect::<Vec<(&String, &usize)>>();
+        dict_inner.sort_by(|a, b| a.1.cmp(b.1));
+
+        println!("BOW DICTIONARY: {:?}", dict_inner);
+    }
+    
 
     bags_of_words
 }

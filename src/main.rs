@@ -1,80 +1,82 @@
-use std::fs;
-mod porter;
-mod bow;
+use std::{fs};
+
+
+use ml::neural_net::{NeuralNet, net_shape::NetShape, net_layer::*, act_func::ActFunc, training_helpers::*};
+
+mod pre_process;
+
 
 fn main() {
-    let text_list = read_text_data(20);
+    let data_number: usize = 100;
 
-    let text = text_list[0].0.clone();
+    
 
-    let cleaned_text = clean_text(text.to_lowercase());
-    let split_text: Vec<&str> = cleaned_text.split(" ").collect();
+    //read raw text data
+    let text_list: Vec<(String, u8)> = load_text_data(data_number);
+    
+    println!("Loading raw text data ({} files attempted, {} read).\n", data_number, text_list.len());
 
-    let stemmed_text: Vec<String> = split_text.iter().map(|word| porter::stem((*word).into())).collect();
-    let stemmed_text = stemmed_text.join(" ");
+    let [training_data, testing_data] = pre_process::pre_process(text_list);
 
-    println!("Original text:\n{}\n\nCleaned text:\n{}\n\nStemmed Text:\n{}", text, cleaned_text, stemmed_text );
+
+
+    //AI
+    println!("\nRunning ai training.");
+    let shape = NetShape::new(vec![NetLayerType::DenseLayer { input_node_num: 3919, output_node_num: 391, act_func: ActFunc::Sigmoid },
+                                                            NetLayerType::DenseLayer { input_node_num: 391, output_node_num: 4, act_func: ActFunc::Sigmoid },
+                                                            NetLayerType::DenseLayer { input_node_num: 4, output_node_num: 1, act_func: ActFunc::Sigmoid }]).unwrap();
+
+    println!("\t1) Creating ai.");
+    
+    let mut nn = NeuralNet::new(shape, 0).unwrap();
+    let tsettings = TSettings::new(100, 0.005, false, 20).unwrap();
+    println!("\t2) NN created and ready to train.");
+    
+
+
+    nn.train(training_data, Some(testing_data), &tsettings).unwrap();
+    println!("\t3) NN trained.");
+    println!("AI training complete.");
+
+
+
 }
 
-fn read_text_data(text_item_num: usize) -> Vec::<(String, u8)> {
+fn load_text_data(data_num: usize) -> Vec<(String, u8)> {
     let mut text_list: Vec<(String, u8)> = Vec::new();
-
-    //positive ratings
-    let mut counter = 0;
-    for entry in fs::read_dir("aclImdb/train/pos").unwrap() {
-        let entry = entry.unwrap();
-        let path = entry.path();
-
-        if path.is_file() {
-            let file_name: String = path.file_stem().unwrap().to_str().unwrap().into();
-            let rating: u8 = (file_name.split('_').last().unwrap()).parse().unwrap();
-
-            text_list.push((fs::read_to_string(path.clone()).unwrap(), rating));
-        }
-
-        counter += 1;
-        if counter >= text_item_num / 2 {
-            break
-        }
-    }
-
-    //negative ratings
-    counter = 0;
-    for entry in fs::read_dir("aclImdb/train/neg").unwrap() {
-        let entry = entry.unwrap();
-        let path = entry.path();
-
-        if path.is_file() {
-            let file_name: String = path.file_stem().unwrap().to_str().unwrap().into();
-            let rating: u8 = (file_name.split('_').last().unwrap()).parse().unwrap();
-
-            text_list.push((fs::read_to_string(path.clone()).unwrap(), rating));
-        }
-
-        counter += 1;
-        if counter >= text_item_num / 2 {
-            break
-        }
-    }
+    text_list.append(&mut get_folder_content("aclImdb/train/pos", data_num * 4 / 10));
+    text_list.append(&mut get_folder_content("aclImdb/train/neg", data_num * 4 / 10));
+    text_list.append(&mut get_folder_content("aclImdb/test/pos", data_num * 1 / 10));
+    text_list.append(&mut get_folder_content("aclImdb/test/neg", data_num * 1 / 10));
 
     text_list
 }
 
-fn clean_text(text: String) -> String {
-    let mut characters: Vec<char> = text.chars().collect();
+fn get_folder_content(path: &str, amount_of_content: usize) -> Vec<(String, u8)> {
+    let mut text_list: Vec<(String, u8)> = Vec::new();
 
-    let mut i = 0;
-    while i < characters.len() {
-        if characters[i].is_alphanumeric() || characters[i].is_whitespace() {
-            i += 1;
-        }
-        else {
-            characters.insert(i, ' ');
-            characters.insert(i + 2, ' ');
-            i += 3
+    //positive ratings
+    let mut counter = 0;
+    for entry in fs::read_dir(path).unwrap() {
+        let entry = entry.unwrap();
+        let path = entry.path();
+
+        if path.is_file() {
+            counter += 1;
+
+            let file_name: String = path.file_stem().unwrap().to_str().unwrap().into();
+            //println!("{}", file_name);
+            let rating: u8 = (file_name.split('_').last().unwrap()).parse().unwrap();
+            let file_content = fs::read_to_string(path.clone()).unwrap();
+
+            if counter > amount_of_content {
+                break
+            }
+            else {
+                text_list.push((file_content, rating));
+            }
         }
     }
 
-    let output: String = characters.into_iter().collect();
-    output.replace("  ", " ")
+    text_list
 }
