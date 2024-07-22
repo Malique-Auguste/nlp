@@ -32,3 +32,27 @@ Reverted to nn: 4028 -> 400 -> 4 -> 1
 25) Training Error: 0.05199     Testing Error: 0.17791  Time Taken: 52.6374697s
 
 Started making use of actual raw testing and training data. Therefore nn: 3919 -> 391 -> 4 -> 1
+0) Training Error: 0.20465      Testing Error: 0.22050  Time Taken: 9.1770204s
+5) Training Error: 0.07440      Testing Error: 0.13650  Time Taken: 46.9119545s
+10) Training Error: 0.04796     Testing Error: 0.13235  Time Taken: 48.5990042s
+15) Training Error: 0.03204     Testing Error: 0.13084  Time Taken: 47.3250805s
+20) Training Error: 0.02237     Testing Error: 0.13060  Time Taken: 46.5912083s
+25) Training Error: 0.01614     Testing Error: 0.13100  Time Taken: 46.9013003s
+
+turned on dropout
+0) Training Error: 0.20312      Testing Error: 0.21743  Time Taken: 11.5287073s
+5) Training Error: 0.07342      Testing Error: 0.13616  Time Taken: 52.5998214s
+10) Training Error: 0.04747     Testing Error: 0.13208  Time Taken: 50.9040094s
+15) Training Error: 0.03213     Testing Error: 0.13038  Time Taken: 49.9055705s
+20) Training Error: 0.02234     Testing Error: 0.13021  Time Taken: 49.8563774s
+25) Training Error: 0.01631     Testing Error: 0.13049  Time Taken: 49.7822189s
+
+turned up input to 400 and thus nn: 9326 -> 933 -> 9 -> 1
+0) Training Error: 0.14272      Testing Error: 0.10997  Time Taken: 225.429306s
+5) Training Error: 0.07867      Testing Error: 0.11065  Time Taken: 1129.5851298s
+10) Training Error: 0.04926     Testing Error: 0.09834  Time Taken: 1178.0593632s
+15) Training Error: 0.03469     Testing Error: 0.09109  Time Taken: 1187.206452s
+20) Training Error: 0.02657     Testing Error: 0.08683  Time Taken: 1161.5772408s
+25) Training Error: 0.02135     Testing Error: 0.08416  Time Taken: 1191.3882727s
+30) Training Error: 0.01751     Testing Error: 0.08267  Time Taken: 1187.6982547s
+35) Training Error: 0.01468     Testing Error: 0.08142  Time Taken: 1080.1049193s

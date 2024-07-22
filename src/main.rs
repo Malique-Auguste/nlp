@@ -7,7 +7,7 @@ mod pre_process;
 
 
 fn main() {
-    let data_number: usize = 100;
+    let data_number: usize = 400;
 
     
 
@@ -22,14 +22,14 @@ fn main() {
 
     //AI
     println!("\nRunning ai training.");
-    let shape = NetShape::new(vec![NetLayerType::DenseLayer { input_node_num: 3919, output_node_num: 391, act_func: ActFunc::Sigmoid },
-                                                            NetLayerType::DenseLayer { input_node_num: 391, output_node_num: 4, act_func: ActFunc::Sigmoid },
-                                                            NetLayerType::DenseLayer { input_node_num: 4, output_node_num: 1, act_func: ActFunc::Sigmoid }]).unwrap();
+    let shape = NetShape::new(vec![NetLayerType::DenseLayer { input_node_num: 9326, output_node_num: 933, act_func: ActFunc::Sigmoid },
+                                                            NetLayerType::DenseLayer { input_node_num: 933, output_node_num: 9, act_func: ActFunc::Sigmoid },
+                                                            NetLayerType::DenseLayer { input_node_num: 9, output_node_num: 1, act_func: ActFunc::Sigmoid }]).unwrap();
 
     println!("\t1) Creating ai.");
     
     let mut nn = NeuralNet::new(shape, 0).unwrap();
-    let tsettings = TSettings::new(100, 0.005, false, 20).unwrap();
+    let tsettings = TSettings::new(100, 0.005, true, 20, Some(["saved_nn/nn_lowest_err".into(), "saved_nn/nn_current".into()])).unwrap();
     println!("\t2) NN created and ready to train.");
     
 
@@ -38,7 +38,7 @@ fn main() {
     println!("\t3) NN trained.");
     println!("AI training complete.");
 
-
+    
 
 }
 
