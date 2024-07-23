@@ -3,7 +3,7 @@ pub fn space_out_non_alphanumeric(text: String) -> String {
 
     let mut i = 0;
     while i < characters.len() {
-        if characters[i].is_alphanumeric() || characters[i].is_whitespace() {
+        if characters[i] == '\'' || characters[i].is_alphanumeric() || characters[i].is_whitespace() {
             i += 1;
         }
         else {
