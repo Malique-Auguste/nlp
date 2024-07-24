@@ -1,14 +1,14 @@
 use std::collections::HashMap;
 use ndarray::Array2;
 
-struct BowGenerator {
+pub struct BowGenerator {
     dictionary: HashMap<String, usize>
 }
 
 impl BowGenerator {
     pub fn new() -> BowGenerator {
         BowGenerator {
-            dictionary: HashMap::new();
+            dictionary: HashMap::new()
         }
     }
 

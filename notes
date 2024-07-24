@@ -1,2 +1,10 @@
 Made bow struct.
 Need to impleemnt ability to gen bow for text multiple times using same dict
+
+
+Based on Experiments:   
+    Alphas 0.01 > 0.005
+
+    Configuration of nodes decreasing to 10% of orignal value and then 0.1% of original value is optimal
+    E.g: 9000 -> 900 -> 9 -> 1
+

@@ -41,8 +41,10 @@ pub fn pre_process_reviews(text_list: Vec<(String, u8)>) -> [TData; 2] {
     //and rating
     let (text, ratings): (Vec<String>, Vec<u8>)  = stemmed_text_list.into_iter().unzip();
 
-    let mut training_input: Vec<Array2<f64>> = bow::gen_bags_of_words(text, false, false);
-    let mut training_output: Vec<Array2<f64>> = ratings.into_iter().map(|r| Array2::from_elem((1,1), (r as f64/10.0).round())).collect();
+    let mut bow_gen = bow::BowGenerator::new();
+
+    let mut training_input: Vec<Array2<f64>> = bow_gen.gen_bags_of_words(text, false, false);
+    let mut training_output: Vec<Array2<f64>> = ratings.into_iter().map(|r| Array2::from_elem((1,1), r as f64/10.0)).collect();
     println!("\t3) Generated ml input and output data (bow contains: {} unique words).", training_input[0].shape()[1]);
 
 
@@ -87,12 +89,12 @@ pub fn pre_process_auto_complete(text_list: Vec<(String, u8)>, output_length: us
 
     println!("\t1) Cleaned raw text ({} unique words).", counter);
 
-    let sub_strings: Vec<(String, String)> = cleaned_text_list.into_iter().fold(Vec::new(), |acc, text| {
+    let sub_strings: Vec<(String, String)> = cleaned_text_list.into_iter().fold(Vec::new(), |mut acc, text| {
         let mut temp: Vec<String> = text.split_whitespace().map(|word| word.into()).collect();
         let mut i = 0;
 
         while i + output_length + 1 < temp.len() {
-            acc.push((temp[i..(i + output_length)].join(" "), temp[i + output_length + 1]));
+            acc.push((temp[i..(i + output_length)].join(" "), temp[i + output_length + 1].clone()));
             i += 1;
         }
 
@@ -102,8 +104,12 @@ pub fn pre_process_auto_complete(text_list: Vec<(String, u8)>, output_length: us
     println!("\t2) Generated sub strings from text ({} sub strings of length {}).", sub_strings.len(), output_length);
     let (text, output): (Vec<String>, Vec<String>) = sub_strings.into_iter().unzip();
 
+    let mut bow_gen = bow::BowGenerator::new();
 
-    let mut training_input: Vec<Array2<f64>> = bow::gen_bags_of_words(text, false, false);
+    let mut training_input: Vec<Array2<f64>> = bow_gen.gen_bags_of_words(text, false, false);
+    unimplemented!();
+
+    /*
     let mut training_output: Vec<Array2<f64>> = ratings.into_iter().map(|r| Array2::from_elem((1,1), (r as f64/10.0).round())).collect();
     println!("\t3) Generated ml input and output data (bow contains: {} unique words).", training_input[0].shape()[1]);
 
@@ -126,4 +132,5 @@ pub fn pre_process_auto_complete(text_list: Vec<(String, u8)>, output_length: us
     println!("Pre-processing complete.");
 
     [training_data, testing_data]
+    */
 }
