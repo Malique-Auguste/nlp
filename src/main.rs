@@ -25,8 +25,8 @@ fn main() {
     //AI
     println!("\nRunning ai training.");
     
-    let shape = NetShape::new(vec![NetLayerType::DenseLayer { input_node_num: 9326, output_node_num: 933, act_func: ActFunc::Sigmoid },
-                                                            NetLayerType::DenseLayer { input_node_num: 933, output_node_num: 9, act_func: ActFunc::Sigmoid },
+    let shape = NetShape::new(vec![NetLayerType::DenseLayer { input_node_num: 9326, output_node_num: 311, act_func: ActFunc::Sigmoid },
+                                                            NetLayerType::DenseLayer { input_node_num: 311, output_node_num: 9, act_func: ActFunc::Sigmoid },
                                                             NetLayerType::DenseLayer { input_node_num: 9, output_node_num: 1, act_func: ActFunc::Sigmoid }]).unwrap();
     
     println!("\t1) Creating ai.");
@@ -39,7 +39,7 @@ fn main() {
     let mut nn = NeuralNet::load("saved_nn/alpha/1/nn_min_train_err").unwrap();
     */
     
-    let tsettings = TSettings::new(100, 0.5, true, 20, Some("saved_nn/alpha/5/nn_min_train_err".into()), Some("saved_nn/alpha/5/nn_min_test_err".into())).unwrap();
+    let tsettings = TSettings::new(100, 0.005, true, 20, Some("saved_nn/hidden1/1/nn_min_train_err".into()), Some("saved_nn/hidden1/1/nn_min_test_err".into())).unwrap();
     println!("\t2) NN ready to train.");
     
 

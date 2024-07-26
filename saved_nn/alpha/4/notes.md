@@ -17,5 +17,9 @@ alpha = 0.1
 65) Training Error: 0.00382     Testing Error: 0.09602  Time Taken: 1030.2353698s
 
 For 1st 5 epochs
-change in training error per epoch = 0.03778
-change in testing error per epoch = -0.00817
+change in training error per epoch = -0.03778
+change in testing error per epoch = 0.00817
+
+For 1st 15 epochs
+change in training error per epoch = -0.01301
+change in testing error per epoch = -0.00352

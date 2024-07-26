@@ -1,9 +1,4 @@
 alpha = 0.05
-dropout = true
-rand = 0
-act = sigmoid
-
-9326 -> 933 -> 9 -> 1
 
 0) Training Error: 0.20120      Testing Error: 0.15898
 1) Training Error: 0.04309      Testing Error: 0.20621  Time Taken: 274.5571457s
@@ -20,3 +15,7 @@ act = sigmoid
 For 1st 5 epochs
 change in training error per epoch = 0.03612
 change in testing error per epoch = -0.00166
+
+For 1st 15 epochs
+change in training error per epoch = -0.01310
+change in testing error per epoch = -0.00386
