@@ -1,3 +1,4 @@
 /target
 /aclImdb
-/saved_nn
+**/nn_min_test_err
+**/nn_min_train_err

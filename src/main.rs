@@ -36,10 +36,10 @@ fn main() {
 
     /*
     println!("\t1) Loading ai.");
-    let mut nn = NeuralNet::load("saved_nn/nn_lowest_err").unwrap();
+    let mut nn = NeuralNet::load("saved_nn/alpha/1/nn_min_train_err").unwrap();
     */
     
-    let tsettings = TSettings::new(100, 0.05, true, 20, Some("saved_nn/alpha/3/nn_min_train_err".into()), Some("saved_nn/alpha/3/nn_min_test_err".into())).unwrap();
+    let tsettings = TSettings::new(100, 0.5, true, 20, Some("saved_nn/alpha/5/nn_min_train_err".into()), Some("saved_nn/alpha/5/nn_min_test_err".into())).unwrap();
     println!("\t2) NN ready to train.");
     
 
