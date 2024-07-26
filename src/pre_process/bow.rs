@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use ndarray::Array2;
 
+//BOW = Bag of Words
 pub struct BowGenerator {
     dictionary: HashMap<String, usize>
 }
@@ -12,9 +13,9 @@ impl BowGenerator {
         }
     }
 
-    pub fn gen_bags_of_words(&mut self, text_list: Vec<String>, count_duplicates: bool, print_dict: bool) -> Vec<Array2<f64>> {        
+    pub fn expand_dictionary(&mut self, text_list: &Vec<String>, print_dict: bool) {        
         //populates dictionary with all the words in the dataset
-        let mut counter: usize = 0;
+        let mut counter: usize = self.dictionary.len();
         for text in text_list.iter() {
             for word in text.split_whitespace() {
                 if !self.dictionary.contains_key(word) {
@@ -23,8 +24,18 @@ impl BowGenerator {
                 }
             }
         }
+
+        if print_dict {
+            let mut dict_inner = self.dictionary.iter().collect::<Vec<(&String, &usize)>>();
+            dict_inner.sort_by(|a, b| a.1.cmp(b.1));
     
-        let unique_word_amount = self.dictionary.len();
+            println!("BOW DICTIONARY: {:?}", dict_inner);
+        }
+    }
+
+    pub fn gen_bow (&mut self, text_list: &Vec<String>, count_duplicates: bool) -> Vec<Array2<f64>> {
+    
+        let unique_word_amount = self.unique_word_amount();
         let mut bags_of_words: Vec<Array2<f64>> = Vec::new();
         
         //creating bags of words
@@ -44,14 +55,10 @@ impl BowGenerator {
             }
         }
     
-        if print_dict {
-            let mut dict_inner = self.dictionary.iter().collect::<Vec<(&String, &usize)>>();
-            dict_inner.sort_by(|a, b| a.1.cmp(b.1));
-    
-            println!("BOW DICTIONARY: {:?}", dict_inner);
-        }
-        
-    
         bags_of_words
+    }
+
+    pub fn unique_word_amount(&self) -> usize {
+        self.dictionary.len()
     }
 }
