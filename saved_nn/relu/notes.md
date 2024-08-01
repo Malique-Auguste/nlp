@@ -1,0 +1,15 @@
+0) Training Error: 10774.22559  Testing Error: 6850.43844       Time Taken: 64.5919223s
+1) Training Error: 747.20524    Testing Error: 8.09196  Time Taken: 193.1248769s
+2) Training Error: 32.31551     Testing Error: 4.09111  Time Taken: 207.1052238s
+3) Training Error: 19.61418     Testing Error: 3.48387  Time Taken: 199.8409649s
+4) Training Error: 15.80929     Testing Error: 3.46025  Time Taken: 344.199923s
+5) Training Error: 13.91668     Testing Error: 3.65722  Time Taken: 333.1711377s
+6) Training Error: 12.68345     Testing Error: 3.98181  Time Taken: 186.3461565s
+7) Training Error: 11.72705     Testing Error: 4.38077  Time Taken: 207.4992962s
+8) Training Error: 10.93832     Testing Error: 4.84430  Time Taken: 212.359342s
+9) Training Error: 10.27716     Testing Error: 5.37291  Time Taken: 223.8480938s
+10) Training Error: 9.72005     Testing Error: 5.96692  Time Taken: 232.3275063s
+11) Training Error: 9.24797     Testing Error: 6.62561  Time Taken: 230.1440748s
+12) Training Error: 8.84644     Testing Error: 7.35043  Time Taken: 234.9888906s
+13) Training Error: 8.48218     Testing Error: 8.10692  Time Taken: 226.9913971s
+14) Training Error: 8.11883     Testing Error: 8.87079  Time Taken: 231.5857303s

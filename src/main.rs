@@ -9,7 +9,8 @@ mod data_handler;
 
 fn main() {
     
-    let data_number: usize = 400;
+    let data_number: usize = 5;
+    let substring_length = 7;
 
     
     
@@ -18,29 +19,29 @@ fn main() {
     
     println!("Loading raw text data ({} files attempted, {} read).\n", data_number, text_list.len());
 
-    let [training_data, testing_data] = pre_process::pre_process_reviews(text_list);
+    let [training_data, testing_data] = pre_process::pre_process_auto_complete(text_list, substring_length);
 
 
 
     //AI
     println!("\nRunning ai training.");
 
-    /*
-    let shape = NetShape::new(vec![NetLayerType::DenseLayer { input_node_num: 9326, output_node_num: 1244, act_func: ActFunc::Sigmoid },
-                                                            NetLayerType::DenseLayer { input_node_num: 1244, output_node_num: 9, act_func: ActFunc::Sigmoid },
-                                                            NetLayerType::DenseLayer { input_node_num: 9, output_node_num: 1, act_func: ActFunc::Sigmoid }]).unwrap();
+    
+    let shape = NetShape::new(vec![NetLayerType::DenseLayer { input_node_num: 682, output_node_num: 200, act_func: ActFunc::Sigmoid },
+                                                            NetLayerType::DenseLayer { input_node_num: 200, output_node_num: 100, act_func: ActFunc::Sigmoid },
+                                                            NetLayerType::DenseLayer { input_node_num: 100, output_node_num: 682, act_func: ActFunc::Sigmoid }]).unwrap();
     
     println!("\t1) Creating ai.");
     
     let mut nn = NeuralNet::new(shape, 0).unwrap();
-    */
-
     
+
+    /*
     println!("\t1) Loading ai.");
     let mut nn = NeuralNet::load("saved_nn/hidden1/3/nn_min_train_err").unwrap();
+    */
     
-    
-    let tsettings = TSettings::new(100, 0.005, true, 20, Some("saved_nn/hidden1/3/nn_min_train_err".into()), Some("saved_nn/hidden1/3/nn_min_test_err".into())).unwrap();
+    let tsettings = TSettings::new(100, 0.05, true, 50, Some("saved_nn/autocompl/2/nn_min_train_err".into()), Some("saved_nn/autocompl/2/nn_min_test_err".into())).unwrap();
     println!("\t2) NN ready to train.");
     
 

@@ -10,3 +10,10 @@
 35) Training Error: 0.02800     Testing Error: 0.09893  Time Taken: 382.6768036s
 40) Training Error: 0.02300     Testing Error: 0.09780  Time Taken: 380.6265012s
 
+For 1st 5 epochs
+change in training error per epoch = -0.00849
+change in testing error per epoch = -0.00078
+
+For 1st 15 epochs
+change in training error per epoch = -0.00591
+change in testing error per epoch = -0.00134

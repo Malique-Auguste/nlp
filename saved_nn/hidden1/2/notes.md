@@ -1,4 +1,4 @@
-9326 -> 311 -> 9 -> 1
+9326 -> 622 -> 9 -> 1
 
 0) Training Error: 0.14156      Testing Error: 0.12593  Time Taken: 52.5952191s
 5) Training Error: 0.10151      Testing Error: 0.11733  Time Taken: 695.0073219s
@@ -8,3 +8,11 @@
 25) Training Error: 0.02288     Testing Error: 0.11418  Time Taken: 682.1909689s
 30) Training Error: 0.01821     Testing Error: 0.11287  Time Taken: 682.762029s
 35) Training Error: 0.01485     Testing Error: 0.11166  Time Taken: 675.7212885s
+
+For 1st 5 epochs
+change in training error per epoch = -0.00801
+change in testing error per epoch = -0.00172
+
+For 1st 15 epochs
+change in training error per epoch = -0.00672
+change in testing error per epoch = -0.00066
